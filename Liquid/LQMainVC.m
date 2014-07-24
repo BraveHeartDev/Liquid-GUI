@@ -14,15 +14,6 @@
 
 @implementation LQMainVC
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -32,77 +23,59 @@
     [self disableSlidePanGestureForRightMenu];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 -(NSString *)segueIdentifierForIndexPathInLeftMenu:(NSIndexPath *)indexPath
 {
+    NSString *identifier;
     switch (indexPath.row)
     {
         case 0:
-            return @"homeLeftSegue";
+            identifier = @"homeLeftSegue";
+            break;
             
         case 1:
-            return @"firstLeftSegue";
+            identifier = @"firstLeftSegue";
+            break;
             
         case 2:
-            return @"secondLeftSegue";
+            identifier = @"secondLeftSegue";
+            break;
             
         case 3:
-            return @"thirdLeftSegue";
+            identifier = @"thirdLeftSegue";
+            break;
             
         case 4:
-            return @"fourthLeftSegue";
-            
-        default:
-            return nil;
+        {
+            BOOL isVIP = true;
+            if(isVIP)
+                identifier = @"fourthLeftSegue";
+            break;
+        }
     }
+    return identifier;
 }
 
 -(NSString *)segueIdentifierForIndexPathInRightMenu:(NSIndexPath *)indexPath
 {
+    NSString *identifier;
     switch (indexPath.row)
     {
         case 0:
-            return @"firstRightSegue";
+            identifier = @"firstRightSegue";
+            break;
             
         case 1:
-            return @"secondRightSegue";
-            
-        default:
-            return nil;
+            identifier = @"secondRightSegue";
+            break;
     }
-}
-
-- (CGFloat)leftMenuWidth
-{
-    return 90;
-}
-
-- (CGFloat)rightMenuWidth
-{
-    return 90;
+    return identifier;
 }
 
 -(void)configureLeftMenuButton:(UIButton *)button
 {
     CGRect frame = button.frame;
-    frame.origin = CGPointMake(0.0f, 0.0f);
-    frame.size = CGSizeMake(40.0f, 40.0f);
+    frame.origin = (CGPoint){0.0f, 0.0f};
+    frame.size = (CGSize){30.0f, 30.0f};
     button.frame = frame;
     
     [button setImage:[UIImage imageNamed:@"leftButton"] forState:UIControlStateNormal];
@@ -112,10 +85,15 @@
 {
     CGRect frame = button.frame;
     frame.origin = CGPointMake(0.0f, 0.0f);
-    frame.size = CGSizeMake(40.0f, 40.0f);
+    frame.size = CGSizeMake(30.0f, 30.0f);
     button.frame = frame;
     
     [button setImage:[UIImage imageNamed:@"rightButton"] forState:UIControlStateNormal];
+}
+
+-(AMPrimaryMenu)primaryMenu
+{
+    return AMPrimaryMenuLeft;
 }
 
 @end
